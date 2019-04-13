@@ -1,6 +1,6 @@
 package main;
 
-import gui.MainMenuScreen;
+import gamescene.MainMenuScreen;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -36,7 +36,6 @@ public class Main extends Application{
 		});
 	}
 	
-	/*
 	private void setLoadScreenButton(Stage primaryStage, Scene s, Button b) {
 		b.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
@@ -45,6 +44,5 @@ public class Main extends Application{
 			}
 		});
 	}
-	*/
 
 }

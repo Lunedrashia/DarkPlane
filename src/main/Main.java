@@ -1,6 +1,7 @@
 package main;
 
 import gamescene.MainMenuScreen;
+import gamescene.TestScene;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ public class Main extends Application{
 		// TODO Setup the menu
 		MainMenuScreen mainMenu = new MainMenuScreen();
 		setQuitButton(primaryStage, mainMenu.getQuitButton());
+		setLoadScreenButton(primaryStage, new TestScene(), mainMenu.getPlayButton());
 		
 		primaryStage.setScene(new Scene(mainMenu, 800, 600));
 		primaryStage.setTitle("Game Name");

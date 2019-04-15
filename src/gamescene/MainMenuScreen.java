@@ -28,6 +28,10 @@ public class MainMenuScreen extends VBox {
 		
 		this.getChildren().addAll(gameTitle, playButton, quitButton);
 	}
+	
+	public Button getPlayButton() {
+		return playButton;
+	}
 
 	public Button getQuitButton() {
 		return quitButton;

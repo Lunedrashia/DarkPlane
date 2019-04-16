@@ -10,18 +10,11 @@ public class Input {
 	private static HashSet<KeyCode> allInput = new HashSet<KeyCode>();
 	
 	public static void setKeyPressed(KeyCode k) {
-		if (k == KeyCode.SPACE) {
-			shotFired = true;
-		}
-		else {
-			allInput.add(k);
-		}
+		allInput.add(k);
 	}
 	
 	public static void releaseKey(KeyCode k) {
-		if (allInput.contains(k)) {
-			allInput.remove(k);
-		}
+		allInput.remove(k);
 	}
 	
 	public static boolean checkKeyPressed(KeyCode k) {

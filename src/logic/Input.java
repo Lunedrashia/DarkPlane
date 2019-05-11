@@ -23,11 +23,16 @@ public class Input {
 	
 	public static void update() {
 		shotFired = false;
-		if (!allInput.isEmpty()) {
-			for (KeyCode k: allInput) {
-				System.out.print("+" + k);
-			}
-			System.out.println();
-		}
+//		if (!allInput.isEmpty()) {
+//			for (KeyCode k: allInput) {
+//				System.out.print("+" + k);
+//			}
+//			System.out.println();
+//		}
+	}
+	
+	public static void reset() {
+		allInput.clear();
+		shotFired = false;
 	}
 }

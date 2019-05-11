@@ -7,12 +7,12 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
-public class MainMenuScreen extends VBox {
-
+public class MainMenuScene extends VBox {
+	
 	private Button playButton;
 	private Button quitButton;
 	
-	public MainMenuScreen() {
+	public MainMenuScene() {
 		// TODO Initialize objects in MenuScreen
 		super();
 		this.setAlignment(Pos.TOP_CENTER);

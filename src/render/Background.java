@@ -2,8 +2,15 @@ package render;
 
 import javafx.scene.canvas.GraphicsContext;
 
-public class Background implements Renderable {
+public abstract class Background implements Renderable {
 
+	protected double x, y;
+	
+	public Background(double x, double y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	@Override
 	public int getLayer() {
 		// TODO Auto-generated method stub
@@ -22,10 +29,6 @@ public class Background implements Renderable {
 		return true;
 	}
 
-	@Override
-	public void draw(GraphicsContext gc) {
-		// TODO Auto-generated method stub
-		
-	}
+	public abstract void draw(GraphicsContext gc);
 	
 }

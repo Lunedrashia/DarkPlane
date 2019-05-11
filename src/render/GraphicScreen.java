@@ -8,7 +8,7 @@ import javafx.scene.paint.Color;
 import logic.Input;
 
 public class GraphicScreen extends Canvas {
-
+	
 	public GraphicScreen(double width, double height) {
 		super(width, height);
 		this.setVisible(true);
@@ -40,6 +40,7 @@ public class GraphicScreen extends Canvas {
 				currentRender.draw(gc);
 			}
 		}
+		
 	}
 	
 }

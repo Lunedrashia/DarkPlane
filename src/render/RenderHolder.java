@@ -45,4 +45,8 @@ public class RenderHolder {
 		return allRender;
 	}
 	
+	public void reset() {
+		allRender.clear();
+	}
+	
 }

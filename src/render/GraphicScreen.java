@@ -2,7 +2,6 @@ package render;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import logic.Input;
@@ -17,17 +16,16 @@ public class GraphicScreen extends Canvas {
 	
 	private void addListener() {
 		this.setOnKeyPressed((KeyEvent e) -> {
-			if (e.getCode() == KeyCode.SPACE) {
-				Input.shotFired = true;
-			}
-			else {
-				Input.setKeyPressed(e.getCode());
-			}
+			Input.setKeyPressed(e.getCode());
 		});
 		this.setOnKeyReleased((KeyEvent e) -> {
-			if (e.getCode() != KeyCode.SPACE) {
-				Input.releaseKey(e.getCode());
+			if (e.getCode() == Input.skill2Key) {
+				Input.skill2Used = true;
 			}
+			if (e.getCode() == Input.skill1Key) {
+				Input.skill1Used = true;
+			}
+			Input.releaseKey(e.getCode());
 		});
 	}
 	

@@ -19,8 +19,8 @@ public class Player extends GameEntity {
 	
 	private Image currentImage;
 	private Image trailImage;
-	private Skill pressM = new BuckShot();
-	private Skill pressSpace = new ShootBasicBullet();
+	private Skill skill1 = new ShootBasicBullet();
+	private Skill skill2 = new BuckShot();
 	private Point2D previousLocation;
 	private int previousAngle;
 	
@@ -58,11 +58,11 @@ public class Player extends GameEntity {
 			this.rotateRight();
 		}
 		this.move();
-		if (Input.shotFired) {
-			this.useSkill(pressSpace, location, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
+		if (Input.skill1Used) {
+			this.useSkill(skill1, location, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
 		}
-		if (Input.checkKeyPressed(KeyCode.M)) {
-			this.useSkill(pressM, location, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
+		else if (Input.skill2Used) {
+			this.useSkill(skill2, location, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
 		}
 	}
 	

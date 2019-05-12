@@ -45,14 +45,14 @@ public abstract class GameEntity implements Renderable {
 	
 	public void rotateRight() {
 		angle += rotateSpeed;
-		if (angle > 360) {
+		if (angle > 180) {
 			angle -= 360;
 		}
 	}
 	
 	public void rotateLeft() {
 		angle -= rotateSpeed;
-		if (angle < 0) {
+		if (angle < -180) {
 			angle += 360;
 		}
 	}
@@ -107,7 +107,9 @@ public abstract class GameEntity implements Renderable {
 		try {
 			skill.activate(location, angle, radius);
 		} catch (SkillNotAvailableException e) {
-			System.out.println(e.message);
+			if (this == GameLogic.getInstance().getPlayer()) {
+				System.out.println(e.message);
+			}
 		}
 	}
 	
@@ -115,7 +117,9 @@ public abstract class GameEntity implements Renderable {
 		try {
 			skill.activate(location, angle, radius, target);
 		} catch (SkillNotAvailableException e) {
-			System.out.println(e.message);
+			if (this == GameLogic.getInstance().getPlayer()) {
+				System.out.println(e.message);
+			}
 		}
 	}
 	
@@ -124,12 +128,8 @@ public abstract class GameEntity implements Renderable {
 		return this.getClass().getSimpleName();
 	}
 
-	public double getX() {
-		return location.getX();
-	}
-
-	public double getY() {
-		return location.getY();
+	public Point2D getLocation() {
+		return location;
 	}
 
 	public int getMaxHP() {

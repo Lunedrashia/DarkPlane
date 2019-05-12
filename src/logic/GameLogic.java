@@ -81,6 +81,9 @@ public class GameLogic {
 		if (player != null) {
 			player.update();
 		}
+		for (Enemy enemy: enemies) {
+			enemy.update();
+		}
 		for (Bullet bullet: bullets) {
 			bullet.update();
 		}

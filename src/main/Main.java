@@ -16,6 +16,7 @@ import logic.Input;
 import render.GraphicScreen;
 import render.RenderHolder;
 import ui.InGameUI;
+import ui.Loading;
 
 public class Main extends Application {
 	
@@ -63,10 +64,13 @@ public class Main extends Application {
 		GraphicScreen graphic = new GraphicScreen(2000, 2000);
 		InGameUI inGameUI = new InGameUI();
 		root.setAlignment(inGameUI, Pos.TOP_LEFT);
+		Loading loading = new Loading();
+		root.setAlignment(loading, Pos.TOP_LEFT);
 		GameLogic logic = new GameLogic(stageName);
 		
 		root.getChildren().add(graphic);
 		root.getChildren().add(inGameUI);
+		root.getChildren().add(loading);
 		
 		Rectangle camera = new Rectangle();
 		camera.widthProperty().bind(scene.widthProperty());
@@ -79,15 +83,19 @@ public class Main extends Application {
 
 		primaryStage.setScene(scene);
 		
+		loading.startCountdown(10000);
 		AnimationTimer animation = new AnimationTimer() {
 			@Override
 			public void handle(long arg0) {
 				// TODO Auto-generated method stub
+				if (loading.getCountThread().getState() != Thread.State.TERMINATED) {
+					return;
+				}
 				graphic.draw();
 				logic.update();
 				if (logic.getPlayer() != null) {
-					camera.setX(clampRange(logic.getPlayer().getX() - scene.getWidth()/2, 0, graphic.getWidth() - scene.getWidth()));
-					camera.setY(clampRange(logic.getPlayer().getY() - scene.getHeight()/2, 0, graphic.getHeight() - scene.getHeight()));
+					camera.setX(clampRange(logic.getPlayer().getLocation().getX() - scene.getWidth()/2, 0, graphic.getWidth() - scene.getWidth()));
+					camera.setY(clampRange(logic.getPlayer().getLocation().getY() - scene.getHeight()/2, 0, graphic.getHeight() - scene.getHeight()));
 					inGameUI.setTranslateX(camera.getX());
 					inGameUI.setTranslateY(camera.getY());
 				}  

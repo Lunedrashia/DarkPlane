@@ -1,9 +1,11 @@
 package gameobject;
 
+import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import logic.Enemy;
+import logic.GameLogic;
 
 public class Dummy extends Enemy {
 
@@ -11,7 +13,7 @@ public class Dummy extends Enemy {
 
 	public Dummy(double x, double y, int angle) {
 		super(x, y, angle);
-		maxSpeed = 5;
+		maxSpeed = 3;
 		rotateSpeed = 3;
 		hp = maxHP = 5;
 		atk = 3;
@@ -25,7 +27,25 @@ public class Dummy extends Enemy {
 
 	@Override
 	public void update() {
-
+		//follow the player
+		if (GameLogic.getInstance().getPlayer() == null) {
+			return;
+		}
+		Point2D playerLocation = GameLogic.getInstance().getPlayer().getLocation();
+		double dx = playerLocation.getX() - location.getX();
+		double dy = playerLocation.getY() - location.getY();
+		int targetAngle = (int) Math.toDegrees(Math.atan2(dy, dx));
+		System.out.println(targetAngle);
+		if (targetAngle > angle) {
+			rotateRight();
+		}
+		else if (targetAngle < angle) {
+			rotateLeft();
+		}
+		this.forward();
+		if (Math.abs(targetAngle - angle) < 30) {
+			this.move();
+		}
 	}
 	
 	public Rectangle getBoundary() {

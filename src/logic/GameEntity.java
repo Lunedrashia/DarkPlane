@@ -103,6 +103,22 @@ public abstract class GameEntity implements Renderable {
 		gc.restore();
 	}
 	
+	protected void useSkill(Skill skill, Point2D location, int angle, double radius) {
+		try {
+			skill.activate(location, angle, radius);
+		} catch (SkillNotAvailableException e) {
+			System.out.println(e.message);
+		}
+	}
+	
+	protected void useSkill(NeedTargetSkill skill, Point2D location, int angle, double radius, GameEntity target) {
+		try {
+			skill.activate(location, angle, radius, target);
+		} catch (SkillNotAvailableException e) {
+			System.out.println(e.message);
+		}
+	}
+	
 	@Override
 	public String toString() {
 		return this.getClass().getSimpleName();
@@ -114,6 +130,49 @@ public abstract class GameEntity implements Renderable {
 
 	public double getY() {
 		return location.getY();
+	}
+
+	public int getMaxHP() {
+		return maxHP;
+	}
+
+	public void setMaxHP(int maxHP) {
+		this.maxHP = maxHP;
+		if (hp > maxHP) {
+			hp = maxHP;
+		}
+	}
+
+	public int getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+
+	public int getMaxSpeed() {
+		return maxSpeed;
+	}
+
+	public void setMaxSpeed(int maxSpeed) {
+		this.maxSpeed = maxSpeed;
+	}
+
+	public int getRotateSpeed() {
+		return rotateSpeed;
+	}
+
+	public void setRotateSpeed(int rotateSpeed) {
+		this.rotateSpeed = rotateSpeed;
+	}
+
+	public int getAngle() {
+		return angle;
+	}
+
+	public void setVisible(boolean visible) {
+		this.visible = visible;
 	}
 
 }

@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -14,6 +15,7 @@ import logic.GameLogic;
 import logic.Input;
 import render.GraphicScreen;
 import render.RenderHolder;
+import ui.InGameUI;
 
 public class Main extends Application {
 	
@@ -51,6 +53,7 @@ public class Main extends Application {
 		launch(args);
 	}
 	
+	@SuppressWarnings("static-access")
 	public static void loadScene(Stage primaryStage, String stageName) {
 		StackPane root = new StackPane();
 		Scene scene = new Scene(new BorderPane(root), 800, 600);
@@ -58,8 +61,12 @@ public class Main extends Application {
 		RenderHolder.getInstance().reset();
 		Input.reset();
 		GraphicScreen graphic = new GraphicScreen(2000, 2000);
+		InGameUI inGameUI = new InGameUI();
+		root.setAlignment(inGameUI, Pos.TOP_LEFT);
 		GameLogic logic = new GameLogic(stageName);
+		
 		root.getChildren().add(graphic);
+		root.getChildren().add(inGameUI);
 		
 		Rectangle camera = new Rectangle();
 		camera.widthProperty().bind(scene.widthProperty());
@@ -67,7 +74,7 @@ public class Main extends Application {
         root.setClip(camera);
         root.translateXProperty().bind(camera.xProperty().multiply(-1));
         root.translateYProperty().bind(camera.yProperty().multiply(-1));
-        
+		
 		graphic.requestFocus();
 
 		primaryStage.setScene(scene);
@@ -81,6 +88,8 @@ public class Main extends Application {
 				if (logic.getPlayer() != null) {
 					camera.setX(clampRange(logic.getPlayer().getX() - scene.getWidth()/2, 0, graphic.getWidth() - scene.getWidth()));
 					camera.setY(clampRange(logic.getPlayer().getY() - scene.getHeight()/2, 0, graphic.getHeight() - scene.getHeight()));
+					inGameUI.setTranslateX(camera.getX());
+					inGameUI.setTranslateY(camera.getY());
 				}  
 				RenderHolder.getInstance().update();
 				Input.update();

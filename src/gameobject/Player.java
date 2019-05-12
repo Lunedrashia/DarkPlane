@@ -6,16 +6,21 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import logic.GameEntity;
-import logic.GameLogic;
 import logic.Input;
+import logic.Skill;
+import skill.BuckShot;
+import skill.ShootBasicBullet;
 
 public class Player extends GameEntity {
 
 	private static final Image NORMAL_PLANE_IMAGE = new Image(ClassLoader.getSystemResourceAsStream("img/Plane.png"));
+	@SuppressWarnings("unused")
 	private static final Image FADE_PLANE_IMAGE = new Image(ClassLoader.getSystemResourceAsStream("img/FadePlane.png"));
 	
 	private Image currentImage;
 	private Image trailImage;
+	private Skill pressM = new BuckShot();
+	private Skill pressSpace = new ShootBasicBullet();
 	private Point2D previousLocation;
 	private int previousAngle;
 	
@@ -54,9 +59,10 @@ public class Player extends GameEntity {
 		}
 		this.move();
 		if (Input.shotFired) {
-			GameLogic.getInstance().addNewObject(
-					new PlayerBasicBullet(location.getX() + Math.cos(Math.toRadians(angle)) * currentImage.getWidth(), 
-							location.getY() + Math.sin(Math.toRadians(angle)) * currentImage.getHeight(), angle));
+			this.useSkill(pressSpace, location, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
+		}
+		if (Input.checkKeyPressed(KeyCode.M)) {
+			this.useSkill(pressM, location, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
 		}
 	}
 	

@@ -12,7 +12,7 @@ public class PlayerBasicBullet extends Bullet {
 	private final static double WIDTH = 20;
 	private final static double HEIGHT = 2;
 	
-	protected PlayerBasicBullet(double x, double y, int angle) {
+	public PlayerBasicBullet(double x, double y, int angle) {
 		super(x, y, angle);
 		speed = maxSpeed = 7;
 		hp = maxHP = 1;

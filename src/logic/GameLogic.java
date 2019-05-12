@@ -8,6 +8,7 @@ import gameobject.Player;
 import gameobject.PlayerSpawnTower;
 import render.Background;
 import render.RenderHolder;
+import ui.InGameUI;
 
 public class GameLogic {
 
@@ -57,9 +58,10 @@ public class GameLogic {
 		}
 		if ((player == null || !player.isAlive()) && !isSpawning) {
 			lifeLeft--;
+			InGameUI.getInstance().getLifeUI().lifeDecrease();
 			gameEntities.remove(player);
 			player = null;
-			System.out.println("Life left: " + lifeLeft);
+			InGameUI.getInstance().getGameLog().addData("Life left : " + lifeLeft);
 			if (lifeLeft > 0) {
 				isSpawning = true;
 				Thread spawnPlayer = new Thread(() -> {
@@ -87,8 +89,8 @@ public class GameLogic {
 				if (gameEntities.get(i).collideWith(gameEntities.get(j))) {
 					gameEntities.get(i).dealDamage(gameEntities.get(j));
 					gameEntities.get(j).dealDamage(gameEntities.get(i));
-					System.out.println(gameEntities.get(i) + " deal damage to " + gameEntities.get(j));
-					System.out.println(gameEntities.get(j) + " deal damage to " + gameEntities.get(i));
+					//InGameUI.getInstance().getGameLog().addData(gameEntities.get(i) + " deal damage to " + gameEntities.get(j));
+					//InGameUI.getInstance().getGameLog().addData(gameEntities.get(j) + " deal damage to " + gameEntities.get(i));
 				}
 			}
 		}

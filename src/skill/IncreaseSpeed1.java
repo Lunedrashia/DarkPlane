@@ -2,8 +2,6 @@ package skill;
 
 import gameobject.Player;
 import logic.GameEntity;
-import logic.Skill;
-import logic.SkillNotAvailableException;
 
 public class IncreaseSpeed1 extends Skill {
 

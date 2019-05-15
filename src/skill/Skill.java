@@ -1,4 +1,6 @@
-package logic;
+package skill;
+
+import logic.GameEntity;
 
 public abstract class Skill {
 

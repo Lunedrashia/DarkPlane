@@ -1,4 +1,4 @@
-package logic;
+package gameobject.field;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;

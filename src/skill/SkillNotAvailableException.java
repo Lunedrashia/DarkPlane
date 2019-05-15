@@ -1,4 +1,4 @@
-package logic;
+package skill;
 
 @SuppressWarnings("serial")
 public class SkillNotAvailableException extends Exception {

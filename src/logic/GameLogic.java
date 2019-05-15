@@ -4,9 +4,12 @@ import java.util.ArrayList;
 
 import gameobject.Player;
 import gameobject.PlayerSpawnTower;
+import gameobject.bullet.Bullet;
 import gameobject.enemy.Dummy;
+import gameobject.enemy.Enemy;
 import gameobject.enemy.EyeMonster;
 import gameobject.field.BasicField;
+import gameobject.field.Field;
 import render.RenderHolder;
 import ui.InGameUI;
 

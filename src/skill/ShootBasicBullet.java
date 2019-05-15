@@ -3,8 +3,6 @@ package skill;
 import gameobject.bullet.PlayerBasicBullet;
 import logic.GameEntity;
 import logic.GameLogic;
-import logic.Skill;
-import logic.SkillNotAvailableException;
 
 public class ShootBasicBullet extends Skill {
 

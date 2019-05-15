@@ -1,4 +1,6 @@
-package logic;
+package gameobject.enemy;
+
+import logic.GameEntity;
 
 public abstract class Enemy extends GameEntity {
 

@@ -10,11 +10,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.shape.Rectangle;
 import logic.GameEntity;
 import logic.Input;
-import logic.Skill;
 import render.RenderHolder;
 import skill.BuckShot;
 import skill.IncreaseSpeed1;
 import skill.ShootBasicBullet;
+import skill.Skill;
 
 public class Player extends GameEntity {
 

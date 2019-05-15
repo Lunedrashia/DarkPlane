@@ -1,4 +1,6 @@
-package logic;
+package gameobject.bullet;
+
+import logic.GameEntity;
 
 public abstract class Bullet extends GameEntity {
 

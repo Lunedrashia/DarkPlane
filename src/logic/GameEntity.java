@@ -1,10 +1,14 @@
 package logic;
 
+import gameobject.bullet.Bullet;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 import render.Renderable;
+import skill.CanHaveTarget;
+import skill.Skill;
+import skill.SkillNotAvailableException;
 
 public abstract class GameEntity implements Renderable {
 

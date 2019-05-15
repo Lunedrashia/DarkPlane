@@ -1,4 +1,4 @@
-package gameobject;
+package gameobject.effect;
 
 import java.util.ArrayList;
 

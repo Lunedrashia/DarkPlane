@@ -136,7 +136,7 @@ public abstract class GameEntity implements Renderable {
 		}
 	}
 	
-	protected void useSkill(NeedTargetSkill skill, int angle, double radius, GameEntity target) {
+	protected void useSkill(CanHaveTarget skill, int angle, double radius, GameEntity target) {
 		try {
 			skill.activate(this, angle, radius, target);
 		} catch (SkillNotAvailableException e) {

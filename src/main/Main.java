@@ -2,7 +2,6 @@ package main;
 
 import java.lang.Thread.State;
 
-import gamescene.MainMenuScene;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -16,12 +15,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import logic.GAME_STATUS;
 import logic.GameLogic;
+import logic.GraphicScreen;
 import logic.Input;
-import render.GraphicScreen;
 import render.RenderHolder;
 import ui.GameEnd;
 import ui.InGameUI;
 import ui.Loading;
+import ui.MainMenuScene;
 
 public class Main extends Application {
 	

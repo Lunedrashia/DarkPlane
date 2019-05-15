@@ -2,12 +2,11 @@ package logic;
 
 import java.util.ArrayList;
 
-import gameobject.BasicField;
-import gameobject.Dummy;
-import gameobject.EyeMonster;
 import gameobject.Player;
 import gameobject.PlayerSpawnTower;
-import render.Field;
+import gameobject.enemy.Dummy;
+import gameobject.enemy.EyeMonster;
+import gameobject.field.BasicField;
 import render.RenderHolder;
 import ui.InGameUI;
 

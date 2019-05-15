@@ -1,7 +1,8 @@
-package render;
+package logic;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
+import render.Renderable;
 
 public abstract class Field implements Renderable {
 

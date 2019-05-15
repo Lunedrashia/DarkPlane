@@ -1,4 +1,4 @@
-package gamescene;
+package ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

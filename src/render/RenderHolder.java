@@ -44,6 +44,7 @@ public class RenderHolder {
 		imageCollection.put("Life", new Image(ClassLoader.getSystemResourceAsStream("img/Life.png")));
 		imageCollection.put("Plane", new Image(ClassLoader.getSystemResourceAsStream("img/Plane.png")));
 		imageCollection.put("PlayerSpawnTower", new Image(ClassLoader.getSystemResourceAsStream("img/PlayerSpawnTower.png")));
+		imageCollection.put("EnemyPlane", new Image(ClassLoader.getSystemResourceAsStream("img/EnemyPlane.png")));
 	}
 
 	public void addNewObject(Renderable i) {

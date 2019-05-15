@@ -1,5 +1,6 @@
-package gameobject;
+package gameobject.bullet;
 
+import gameobject.effect.BombEffect;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;

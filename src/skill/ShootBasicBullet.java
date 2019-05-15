@@ -1,6 +1,6 @@
 package skill;
 
-import gameobject.PlayerBasicBullet;
+import gameobject.bullet.PlayerBasicBullet;
 import logic.GameEntity;
 import logic.GameLogic;
 import logic.Skill;

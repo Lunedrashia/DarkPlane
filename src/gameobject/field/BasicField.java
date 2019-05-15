@@ -1,9 +1,9 @@
-package gameobject;
+package gameobject.field;
 
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import render.Field;
+import logic.Field;
 import render.RenderHolder;
 
 public class BasicField extends Field {

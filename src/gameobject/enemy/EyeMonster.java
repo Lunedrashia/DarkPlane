@@ -1,23 +1,24 @@
-package gameobject;
+package gameobject.enemy;
 
+import gameobject.effect.BombEffect;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Circle;
 import logic.Enemy;
 import logic.GameLogic;
 import render.RenderHolder;
 
-public class Dummy extends Enemy {
+public class EyeMonster extends Enemy {
 
-	private static Image img = RenderHolder.imageCollection.get("Dummy");
+	private static Image img = RenderHolder.imageCollection.get("EyeMonster");
 
-	public Dummy(double x, double y, int angle) {
+	public EyeMonster(double x, double y, int angle) {
 		super(x, y, angle);
-		maxSpeed = 3;
+		maxSpeed = 2;
 		rotateSpeed = 3;
-		hp = maxHP = 5;
-		atk = 3;
+		hp = maxHP = 25;
+		atk = 5;
 		def = 0;
 	}
 
@@ -52,18 +53,15 @@ public class Dummy extends Enemy {
 		this.move();
 	}
 	
-	public Rectangle getBoundary() {
-		Rectangle boundary = new Rectangle(location.getX() - img.getWidth()/2, 
-				location.getY() - img.getHeight()/2, img.getWidth(), img.getHeight());
-		boundary.setRotate(angle);
-		return boundary;
+	public Circle getBoundary() {
+		return new Circle(location.getX(), location.getY(), img.getHeight()/2);
 	}
 
 	@Override
 	public void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
-		RenderHolder.getInstance().addNewObject(new BombEffect(location.getX(), location.getY(), 1));
+		RenderHolder.getInstance().addNewObject(new BombEffect(location.getX(), location.getY(), 2));
 	}
 
 }

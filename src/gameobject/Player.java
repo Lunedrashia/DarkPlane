@@ -2,6 +2,7 @@ package gameobject;
 
 import java.util.ArrayList;
 
+import gameobject.effect.BombEffect;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;

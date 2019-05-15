@@ -1,10 +1,11 @@
-package render;
+package logic;
 
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
-import logic.Input;
+import render.RenderHolder;
+import render.Renderable;
 
 public class GraphicScreen extends Canvas {
 	

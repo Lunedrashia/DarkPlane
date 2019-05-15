@@ -6,11 +6,11 @@ import javafx.scene.input.KeyCode;
 
 public class Input {
 
-	public static KeyCode skill1Key = KeyCode.SPACE;
-	public static KeyCode skill2Key = KeyCode.M;
+	public static KeyCode skill3Key = KeyCode.SPACE;
 	
 	public static boolean skill1Used = false;
 	public static boolean skill2Used = false;
+	public static boolean skill3Used = false;
 	private static HashSet<KeyCode> allInput = new HashSet<KeyCode>();
 	
 	public static void setKeyPressed(KeyCode k) {
@@ -28,6 +28,7 @@ public class Input {
 	public static void update() {
 		skill1Used = false;
 		skill2Used = false;
+		skill3Used = false;
 //		if (!allInput.isEmpty()) {
 //			for (KeyCode k: allInput) {
 //				System.out.print("+" + k);
@@ -40,5 +41,6 @@ public class Input {
 		allInput.clear();
 		skill1Used = false;
 		skill2Used = false;
+		skill3Used = false;
 	}
 }

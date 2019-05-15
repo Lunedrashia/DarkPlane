@@ -19,11 +19,8 @@ public class GraphicScreen extends Canvas {
 			Input.setKeyPressed(e.getCode());
 		});
 		this.setOnKeyReleased((KeyEvent e) -> {
-			if (e.getCode() == Input.skill2Key) {
-				Input.skill2Used = true;
-			}
-			if (e.getCode() == Input.skill1Key) {
-				Input.skill1Used = true;
+			if (e.getCode() == Input.skill3Key) {
+				Input.skill3Used = true;
 			}
 			Input.releaseKey(e.getCode());
 		});

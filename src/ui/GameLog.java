@@ -4,11 +4,8 @@ import static javafx.scene.layout.BorderStrokeStyle.SOLID;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderWidths;
@@ -21,13 +18,14 @@ public class GameLog extends Pane {
 	private ObservableList<Label> logDataList = FXCollections.observableArrayList();
 	private ListView<Label> logListView;
 	
+	private Thread fade;
+	
 	public GameLog() {
 		
 		logListView = new ListView<Label>(logDataList);
-		logListView.setBackground(new Background(new BackgroundFill(new Color(1, 1, 1, 0.25), 
-				CornerRadii.EMPTY, Insets.EMPTY)));
 		logListView.setFocusTraversable(false);
 		logListView.setPrefSize(300, 200);
+		this.setOpacity(0);
 		
 		logListView.setBorder(new Border(new BorderStroke(Color.LIGHTGRAY, SOLID, 
 			CornerRadii.EMPTY, BorderWidths.DEFAULT)));
@@ -45,6 +43,20 @@ public class GameLog extends Pane {
 			logDataList.remove(0);
 		}
 		logListView.scrollTo(newLabel);
+		fade = new Thread(() -> {
+			try {
+				Thread.sleep(5000);
+				while (this.getOpacity() > 0) {
+					this.setOpacity(this.getOpacity() - 0.05);
+					Thread.sleep(100);
+				}
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		});
+		fade.start();
 	}
 
 	public ListView<Label> getLogListView() {

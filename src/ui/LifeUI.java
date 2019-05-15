@@ -7,10 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
+import render.RenderHolder;
 
 public class LifeUI extends HBox {
 
-	private static Image lifeImage = new Image(ClassLoader.getSystemResourceAsStream("img/Life.png"));
+	private static Image lifeImage = RenderHolder.imageCollection.get("Life");
 	private Label lifeText;
 	private int lifeLeft;
 	

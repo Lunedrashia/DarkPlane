@@ -1,8 +1,11 @@
 package main;
 
+import java.lang.Thread.State;
+
 import gamescene.MainMenuScene;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -11,10 +14,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import logic.GAME_STATUS;
 import logic.GameLogic;
 import logic.Input;
 import render.GraphicScreen;
 import render.RenderHolder;
+import ui.GameEnd;
 import ui.InGameUI;
 import ui.Loading;
 
@@ -62,15 +67,19 @@ public class Main extends Application {
 		RenderHolder.getInstance().reset();
 		Input.reset();
 		GraphicScreen graphic = new GraphicScreen(2000, 2000);
-		InGameUI inGameUI = new InGameUI();
+		GameLogic logic = new GameLogic(stageName);
+		InGameUI inGameUI = new InGameUI(logic.getLifeLeft());
 		root.setAlignment(inGameUI, Pos.TOP_LEFT);
 		Loading loading = new Loading();
 		root.setAlignment(loading, Pos.TOP_LEFT);
-		GameLogic logic = new GameLogic(stageName);
+		GameEnd gameEnd = new GameEnd(10);
+		root.setAlignment(gameEnd, Pos.TOP_LEFT);
+		gameEnd.setVisible(false);
 		
 		root.getChildren().add(graphic);
 		root.getChildren().add(inGameUI);
 		root.getChildren().add(loading);
+		root.getChildren().add(gameEnd);
 		
 		Rectangle camera = new Rectangle();
 		camera.widthProperty().bind(scene.widthProperty());
@@ -91,6 +100,9 @@ public class Main extends Application {
 				if (loading.getCountThread().getState() != Thread.State.TERMINATED) {
 					return;
 				}
+				if (logic.getSpawnMonster().getState() == State.NEW) {
+					logic.getSpawnMonster().start();
+				}
 				graphic.draw();
 				logic.update();
 				if (logic.getPlayer() != null) {
@@ -101,9 +113,26 @@ public class Main extends Application {
 				}  
 				RenderHolder.getInstance().update();
 				Input.update();
-				if (!logic.getGameStatus()) {				
-					primaryStage.setScene(mainMenu);
-					this.stop();
+				if (logic.getGameStatus() != GAME_STATUS.RUNNING) {	
+					gameEnd.setTranslateX(camera.getX());
+					gameEnd.setTranslateY(camera.getY());
+					if (gameEnd.getCountdown().getState() == State.NEW) {
+						gameEnd.setGameStatusText(logic.getGameStatus());
+						gameEnd.startCountdown();
+					}
+					Thread changeBackToMainMenu = new Thread(() -> {
+						try {
+							gameEnd.getCountdown().join();
+						} catch (InterruptedException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						Platform.runLater(() -> {
+							primaryStage.setScene(mainMenu);
+							this.stop();
+						});
+					});
+					changeBackToMainMenu.start();
 				}
 			}
 		};

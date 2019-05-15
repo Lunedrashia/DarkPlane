@@ -16,11 +16,12 @@ public abstract class GameEntity implements Renderable {
 	protected int maxSpeed;
 	protected int rotateSpeed;
 	protected int layer;
-	protected boolean visible, alive;
+	protected boolean isVisible, isAlive;
+	protected boolean isInvincible = false;
 	
 	protected GameEntity(double x, double y, int angle) {
-		visible = true;
-		alive = true;
+		isVisible = true;
+		isAlive = true;
 		location = new Point2D(x, y);
 		this.angle = angle;
 	}
@@ -34,13 +35,13 @@ public abstract class GameEntity implements Renderable {
 	@Override
 	public boolean isVisible() {
 		// TODO Auto-generated method stub
-		return visible;
+		return isVisible;
 	}
 
 	@Override
 	public boolean isAlive() {
 		// TODO Auto-generated method stub
-		return alive;
+		return isAlive;
 	}
 	
 	public void rotateRight() {
@@ -73,11 +74,30 @@ public abstract class GameEntity implements Renderable {
 	}
 	
 	public void move() {
-		location = location.add(Math.cos(Math.toRadians(angle)) * speed, Math.sin(Math.toRadians(angle)) * speed);
+		double dx = Math.cos(Math.toRadians(angle)) * speed;
+		double dy = Math.sin(Math.toRadians(angle)) * speed;
+		Point2D newLocation = location.add(dx, dy);
+		Point2D arenaTopLeft = GameLogic.getInstance().getField().getArenaTopLeft();
+		Point2D arenaBottomRight = GameLogic.getInstance().getField().getArenaBottomRight();
+		if (location.getX() < arenaTopLeft.getX() || location.getY() < arenaTopLeft.getY()
+				|| location.getX() > arenaBottomRight.getX() || location.getY() > arenaBottomRight.getY()) {
+		}
+		else if (newLocation.getX() < arenaTopLeft.getX() || newLocation.getY() < arenaTopLeft.getY()
+				|| newLocation.getX() > arenaBottomRight.getX() || newLocation.getY() > arenaBottomRight.getY()) {
+			if (this instanceof Bullet) {
+				this.isAlive = false;
+			}
+			return;
+		}
+		location = newLocation;
 	}
 	
 	public abstract Shape getBoundary();
 	public abstract void update();
+	
+	public void onDestroy() {
+		isAlive = false;
+	}
 	
 	public boolean collideWith(GameEntity other) {
 		if (other.getBoundary() == null || this.getBoundary() == null) {
@@ -88,10 +108,13 @@ public abstract class GameEntity implements Renderable {
 	}
 	
 	public void dealDamage(GameEntity other) {
+		if (other.isInvincible) {
+			return;
+		}
 		int damage = this.atk - other.def < 0 ? 0 : this.atk - other.def;
 		other.hp -= damage;
 		if (other.hp <= 0) {
-			other.alive = false;
+			other.onDestroy();
 		}
 	}
 	
@@ -103,9 +126,9 @@ public abstract class GameEntity implements Renderable {
 		gc.restore();
 	}
 	
-	protected void useSkill(Skill skill, Point2D location, int angle, double radius) {
+	protected void useSkill(Skill skill, int angle, double radius) {
 		try {
-			skill.activate(location, angle, radius);
+			skill.activate(this, angle, radius);
 		} catch (SkillNotAvailableException e) {
 			if (this == GameLogic.getInstance().getPlayer()) {
 				System.out.println(e.message);
@@ -113,9 +136,9 @@ public abstract class GameEntity implements Renderable {
 		}
 	}
 	
-	protected void useSkill(NeedTargetSkill skill, Point2D location, int angle, double radius, GameEntity target) {
+	protected void useSkill(NeedTargetSkill skill, int angle, double radius, GameEntity target) {
 		try {
-			skill.activate(location, angle, radius, target);
+			skill.activate(this, angle, radius, target);
 		} catch (SkillNotAvailableException e) {
 			if (this == GameLogic.getInstance().getPlayer()) {
 				System.out.println(e.message);
@@ -172,7 +195,15 @@ public abstract class GameEntity implements Renderable {
 	}
 
 	public void setVisible(boolean visible) {
-		this.visible = visible;
+		this.isVisible = visible;
+	}
+
+	public boolean isInvincible() {
+		return isInvincible;
+	}
+
+	public void setInvincible(boolean isInvincible) {
+		this.isInvincible = isInvincible;
 	}
 
 }

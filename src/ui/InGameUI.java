@@ -2,9 +2,12 @@ package ui;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import logic.Input;
 
 public class InGameUI extends StackPane {
 
@@ -13,7 +16,7 @@ public class InGameUI extends StackPane {
 	private GameLog gameLog;
 	private LifeUI lifeUI;
 	
-	public InGameUI() {
+	public InGameUI(int lifeAmount) {
 		super();
 		if (instance != this) {
 			instance = this;
@@ -32,12 +35,28 @@ public class InGameUI extends StackPane {
 		gameLog = new GameLog();
 		setAlignment(gameLog, Pos.BOTTOM_RIGHT);
 		
-		lifeUI = new LifeUI(3);
+		lifeUI = new LifeUI(lifeAmount);
 		setAlignment(lifeUI, Pos.TOP_LEFT);
 		
 		getChildren().add(border);
 		getChildren().add(gameLog);
 		getChildren().add(lifeUI);
+		
+		addListener();
+		
+	}
+	
+	private void addListener() {
+		this.setOnMouseClicked((MouseEvent e) -> {
+			MouseButton button = e.getButton();
+			if (button == MouseButton.PRIMARY) {
+				Input.skill1Used = true;
+				System.out.println("LeftClick");
+			}
+			if (button == MouseButton.SECONDARY) {
+				Input.skill2Used = true;
+			}
+		});
 	}
 	
 	public static InGameUI getInstance() {

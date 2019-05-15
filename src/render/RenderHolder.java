@@ -2,6 +2,9 @@ package render;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
+
+import javafx.scene.image.Image;
 
 public class RenderHolder {
 
@@ -9,6 +12,12 @@ public class RenderHolder {
 	
 	private ArrayList<Renderable> allRender;
 	private Comparator<Renderable> comparator;
+	
+	public static HashMap<String, Image> imageCollection;
+	
+	static {
+		loadResource();
+	}
 	
 	public RenderHolder() {
 		allRender = new ArrayList<Renderable>();
@@ -22,8 +31,21 @@ public class RenderHolder {
 				return 0;
 			}
 		};
+		imageCollection = new HashMap<String, Image>();
 	}
 	
+	private static void loadResource() {
+		// TODO Auto-generated method stub
+		imageCollection.put("BombEffect", new Image(ClassLoader.getSystemResourceAsStream("img/BombEff-Sheet.png")));
+		imageCollection.put("Dummy", new Image(ClassLoader.getSystemResourceAsStream("img/DummyAgain.png")));
+		imageCollection.put("EyeMonster", new Image(ClassLoader.getSystemResourceAsStream("img/EyeMonster.png")));
+		imageCollection.put("FadePlane", new Image(ClassLoader.getSystemResourceAsStream("img/FadePlane.png")));
+		imageCollection.put("GameMap", new Image(ClassLoader.getSystemResourceAsStream("img/GameMap2.png")));
+		imageCollection.put("Life", new Image(ClassLoader.getSystemResourceAsStream("img/Life.png")));
+		imageCollection.put("Plane", new Image(ClassLoader.getSystemResourceAsStream("img/Plane.png")));
+		imageCollection.put("PlayerSpawnTower", new Image(ClassLoader.getSystemResourceAsStream("img/PlayerSpawnTower.png")));
+	}
+
 	public void addNewObject(Renderable i) {
 		allRender.add(i);
 		allRender.sort(comparator);

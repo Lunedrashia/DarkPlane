@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
-import render.AnimationEffect;
 import render.RenderHolder;
 
 public class BombEffect extends AnimationEffect {

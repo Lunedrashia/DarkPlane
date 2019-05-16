@@ -64,13 +64,9 @@ public class RenderHolder {
 		haveLoaded = true;
 	}
 
-	public void addNewObject(Renderable i) {
-		allRender.add(i);
+	public void addNewObject(Renderable render) {
+		allRender.add(render);
 		allRender.sort(comparator);
-	}
-	
-	public static RenderHolder getInstance() {
-		return instance;
 	}
 	
 	public void update() {
@@ -81,12 +77,16 @@ public class RenderHolder {
 		}
 	}
 	
-	public ArrayList<Renderable> getHolder() {
-		return allRender;
-	}
-	
 	public void reset() {
 		allRender.clear();
+	}
+	
+	public static RenderHolder getInstance() {
+		return instance;
+	}
+	
+	public ArrayList<Renderable> getHolder() {
+		return allRender;
 	}
 	
 	public static boolean checkHaveLoaded() {

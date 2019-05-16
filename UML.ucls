@@ -73,8 +73,8 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="render.AnimationEffect" project="Final Project PorkMeth" 
-    file="/Final Project PorkMeth/src/render/AnimationEffect.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="9" language="java" name="gameobject.effect.AnimationEffect" project="Final Project PorkMeth" 
+    file="/Final Project PorkMeth/src/gameobject/effect/AnimationEffect.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3112" y="376"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
@@ -219,7 +219,7 @@
   </class>  
   <class id="25" language="java" name="logic.GameLogic" project="Final Project PorkMeth" 
     file="/Final Project PorkMeth/src/logic/GameLogic.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4309" y="477"/>    
+    <position height="-1" width="-1" x="4309" y="473"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

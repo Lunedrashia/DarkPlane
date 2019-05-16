@@ -13,7 +13,7 @@ public class Dummy extends Chaser {
 
 	public Dummy(double x, double y, int angle) {
 		super(x, y, angle);
-		maxSpeed = 3;
+		maxSpeed = 4;
 		rotateSpeed = 3;
 		hp = maxHP = 5;
 		atk = 3;

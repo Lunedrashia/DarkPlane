@@ -39,8 +39,6 @@ public class Input {
 	
 	public static void reset() {
 		allInput.clear();
-		skill1Used = false;
-		skill2Used = false;
-		skill3Used = false;
+		update();
 	}
 }

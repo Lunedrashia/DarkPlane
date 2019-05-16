@@ -219,7 +219,7 @@
   </class>  
   <class id="25" language="java" name="logic.GameLogic" project="Final Project PorkMeth" 
     file="/Final Project PorkMeth/src/logic/GameLogic.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4309" y="473"/>    
+    <position height="-1" width="-1" x="4305" y="486"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

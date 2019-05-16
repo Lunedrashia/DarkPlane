@@ -180,7 +180,7 @@ public class Main extends Application {
 			while (true) {
 				if (isOnMainMenu) {
 					if (!menuBGM.isPlaying()) {
-						menuBGM.play(0.1);
+						menuBGM.play(0.2);
 					}
 				}
 				else {
@@ -188,7 +188,7 @@ public class Main extends Application {
 				}
 				if (isInGame) {
 					if (!gameBGM.isPlaying()) {
-						gameBGM.play(0.1);
+						gameBGM.play(0.2);
 					}
 				}
 				else {

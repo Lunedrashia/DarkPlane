@@ -30,8 +30,8 @@ public class GraphicScreen extends Canvas {
 	public void draw() {
 		GraphicsContext gc = this.getGraphicsContext2D();
 		gc.setFill(Color.WHITE);
-		for (int i = 0; i < RenderHolder.getInstance().getHolder().size(); i++) {
-			Renderable currentRender = RenderHolder.getInstance().getHolder().get(i);
+		for (int i = 0; i < RenderHolder.getInstance().getAllRender().size(); i++) {
+			Renderable currentRender = RenderHolder.getInstance().getAllRender().get(i);
 			if (currentRender.isAlive() && currentRender.isVisible()) {
 				currentRender.draw(gc);
 			}

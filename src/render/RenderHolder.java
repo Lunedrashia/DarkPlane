@@ -85,7 +85,7 @@ public class RenderHolder {
 		return instance;
 	}
 	
-	public ArrayList<Renderable> getHolder() {
+	public ArrayList<Renderable> getAllRender() {
 		return allRender;
 	}
 	

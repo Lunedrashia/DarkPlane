@@ -40,9 +40,9 @@ public abstract class Shooter extends Enemy {
 			this.backward();
 		}
 
-		if (playerLocation.distance(location) > 400) {
+		if (playerLocation.distance(location) > 600) {
 			this.move();
-		} else if (playerLocation.distance(location) < 400) {
+		} else if (playerLocation.distance(location) < 100) {
 			this.slide(-angle);
 		} else {
 			this.slide(angle + 90);

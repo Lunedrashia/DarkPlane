@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 
 public class RenderHolder {
 
@@ -14,6 +15,9 @@ public class RenderHolder {
 	private Comparator<Renderable> comparator;
 	
 	public static HashMap<String, Image> imageCollection;
+	public static HashMap<String, AudioClip> soundCollection;
+	private static boolean haveLoaded = false;
+	private static boolean menuResourceLoaded = false;
 	
 	static {
 		loadResource();
@@ -32,10 +36,20 @@ public class RenderHolder {
 			}
 		};
 		imageCollection = new HashMap<String, Image>();
+		soundCollection = new HashMap<String, AudioClip>();
 	}
 	
 	private static void loadResource() {
 		// TODO Auto-generated method stub
+		imageCollection.put("GameIcon", new Image(ClassLoader.getSystemResourceAsStream("img/GameIcon.png")));
+		imageCollection.put("MainMenuBG", new Image(ClassLoader.getSystemResourceAsStream("img/MainMenuBackground.png")));
+		soundCollection.put("ClickSound", new AudioClip(ClassLoader.getSystemResource("sound/HeavyButtonClick.wav").toString()));
+		soundCollection.put("MenuBGM", new AudioClip(ClassLoader.getSystemResource("sound/Game-Menu_Looping.wav").toString()));
+		soundCollection.put("GameBGM", new AudioClip(ClassLoader.getSystemResource("sound/Light-Years_V001_Looping.wav").toString()));
+		menuResourceLoaded = true;
+		
+		soundCollection.put("LaserSFX", new AudioClip(ClassLoader.getSystemResource("sound/Laser-Shot.wav").toString()));
+		soundCollection.put("ExplosionSFX", new AudioClip(ClassLoader.getSystemResource("sound/Explosion.wav").toString()));
 		imageCollection.put("BombEffect", new Image(ClassLoader.getSystemResourceAsStream("img/BombEff-Sheet.png")));
 		imageCollection.put("Dummy", new Image(ClassLoader.getSystemResourceAsStream("img/DummyAgain.png")));
 		imageCollection.put("EyeMonster", new Image(ClassLoader.getSystemResourceAsStream("img/EyeMonster.png")));
@@ -44,7 +58,10 @@ public class RenderHolder {
 		imageCollection.put("Life", new Image(ClassLoader.getSystemResourceAsStream("img/Life.png")));
 		imageCollection.put("Plane", new Image(ClassLoader.getSystemResourceAsStream("img/Plane.png")));
 		imageCollection.put("PlayerSpawnTower", new Image(ClassLoader.getSystemResourceAsStream("img/PlayerSpawnTower.png")));
-		imageCollection.put("EnemyPlane", new Image(ClassLoader.getSystemResourceAsStream("img/EnemyPlane.png")));
+		imageCollection.put("EnemyPlane", new Image(ClassLoader.getSystemResourceAsStream("img/EnemyPlane2.png")));
+		imageCollection.put("Slime1", new Image(ClassLoader.getSystemResourceAsStream("img/SlimeBossTopView-1.png")));
+		imageCollection.put("Slime2", new Image(ClassLoader.getSystemResourceAsStream("img/SlimeBossTopView-2.png")));
+		haveLoaded = true;
 	}
 
 	public void addNewObject(Renderable i) {
@@ -70,6 +87,14 @@ public class RenderHolder {
 	
 	public void reset() {
 		allRender.clear();
+	}
+	
+	public static boolean checkHaveLoaded() {
+		return haveLoaded;
+	}
+	
+	public static boolean checkHaveMenuResourceLoaded() {
+		return menuResourceLoaded;
 	}
 	
 }

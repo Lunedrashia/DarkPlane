@@ -7,6 +7,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 import logic.GameEntity;
 import logic.Input;
@@ -14,7 +15,6 @@ import render.RenderHolder;
 import skill.BuckShot;
 import skill.IncreaseSpeed1;
 import skill.ShootBasicBullet;
-import skill.Skill;
 
 public class Player extends GameEntity {
 
@@ -23,9 +23,6 @@ public class Player extends GameEntity {
 	
 	private Image currentImage;
 	private Image trailImage;
-	private Skill skill1 = new ShootBasicBullet();
-	private Skill skill2 = new BuckShot();
-	private Skill skill3 = new IncreaseSpeed1();
 	private ArrayList<Point2D> trailLocations;
 	private ArrayList<Integer> trailAngles;
 	private boolean fading = false;
@@ -35,11 +32,26 @@ public class Player extends GameEntity {
 		maxSpeed = 5;
 		rotateSpeed = 3;
 		hp = maxHP = 1;
-		atk = 99;
+		atk = 5;
 		currentImage = NORMAL_PLANE_IMAGE;
 		trailImage = FADE_PLANE_IMAGE;
 		trailLocations = new ArrayList<Point2D>();
 		trailAngles = new ArrayList<Integer>();
+		skillList.add(new ShootBasicBullet(100));
+		skillList.add(new BuckShot());
+		skillList.add(new IncreaseSpeed1());
+		Thread invincible3Seconds = new Thread(() -> {
+			isInvincible = true;
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			isInvincible = false;
+		});
+		invincible3Seconds.start();
+		blink(3000);
 	}
 
 	@Override
@@ -81,13 +93,13 @@ public class Player extends GameEntity {
 		}
 		this.move();
 		if (Input.skill1Used) {
-			this.useSkill(skill1, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
+			this.useSkill(skillList.get(0), angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 25);
 		}
 		else if (Input.skill2Used) {
-			this.useSkill(skill2, angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 2);
+			this.useSkill(skillList.get(1), angle, currentImage.getWidth()/2 + currentImage.getHeight()/2 - 25);
 		}
 		else if (Input.skill3Used) {
-			this.useSkill(skill3, angle, 0);
+			this.useSkill(skillList.get(2), angle, 0);
 		}
 	}
 	
@@ -107,6 +119,8 @@ public class Player extends GameEntity {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		RenderHolder.getInstance().addNewObject(new BombEffect(location.getX(), location.getY(), 1));
+		AudioClip explosionSound = RenderHolder.soundCollection.get("ExplosionSFX");
+		explosionSound.play(0.2);
 	}
 	
 }

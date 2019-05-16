@@ -1,13 +1,12 @@
 package logic;
 
+import java.lang.Thread.State;
 import java.util.ArrayList;
 
 import gameobject.Player;
 import gameobject.PlayerSpawnTower;
 import gameobject.bullet.Bullet;
-import gameobject.enemy.Dummy;
 import gameobject.enemy.Enemy;
-import gameobject.enemy.EyeMonster;
 import gameobject.field.BasicField;
 import gameobject.field.Field;
 import render.RenderHolder;
@@ -21,13 +20,12 @@ public class GameLogic {
 
 	private ArrayList<GameEntity> gameEntities;
 
-	private Thread spawnMonster;
-
 	private PlayerSpawnTower playerSpawnTower;
 	private Player player;
 	private Field field;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Enemy> enemies;
+	private FactorySpawner factorySpawner = new FactorySpawner();
 	private boolean isSpawning = false;
 
 	public GameLogic(String sceneName) {
@@ -49,6 +47,9 @@ public class GameLogic {
 	}
 
 	public void update() {
+		if (factorySpawner.getSpawnMosterThread().getState() == State.NEW) {
+			factorySpawner.getSpawnMosterThread().start();
+		}
 		for (int i = bullets.size() - 1; i >= 0; i--) {
 			if (!bullets.get(i).isAlive()) {
 				gameEntities.remove(bullets.get(i));
@@ -117,18 +118,6 @@ public class GameLogic {
 			RenderHolder.getInstance().addNewObject(field);
 			this.addNewObject(playerSpawnTower);
 			this.addNewObject(player);
-
-			spawnMonster = new Thread(() -> {
-				try {
-					Thread.sleep(5000);
-					this.addNewObject(new Dummy(300, 500, 0));
-					Thread.sleep(5000);
-					this.addNewObject(new EyeMonster(3000, 2500, 0));
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			});
 		}
 	}
 
@@ -144,7 +133,7 @@ public class GameLogic {
 		if (lifeLeft == 0) {
 			return GAME_STATUS.LOSE;
 		}
-		if (spawnMonster.getState() == Thread.State.TERMINATED && enemies.size() == 0) {
+		if (factorySpawner.getSpawnMosterThread().getState() == Thread.State.TERMINATED && enemies.size() == 0) {
 			return GAME_STATUS.WIN;
 		}
 		return GAME_STATUS.RUNNING;
@@ -156,10 +145,6 @@ public class GameLogic {
 
 	public ArrayList<GameEntity> getGameEntities() {
 		return gameEntities;
-	}
-
-	public void setGameEntities(ArrayList<GameEntity> gameEntities) {
-		this.gameEntities = gameEntities;
 	}
 
 	public PlayerSpawnTower getPlayerSpawnTower() {
@@ -174,16 +159,8 @@ public class GameLogic {
 		return bullets;
 	}
 
-	public void setBullets(ArrayList<Bullet> bullets) {
-		this.bullets = bullets;
-	}
-
 	public ArrayList<Enemy> getEnemies() {
 		return enemies;
-	}
-
-	public void setEnemies(ArrayList<Enemy> enemies) {
-		this.enemies = enemies;
 	}
 
 	public boolean isSpawning() {
@@ -194,16 +171,8 @@ public class GameLogic {
 		this.isSpawning = isSpawning;
 	}
 
-	public static void setInstance(GameLogic instance) {
-		GameLogic.instance = instance;
-	}
-
 	public void setLifeLeft(int lifeLeft) {
 		this.lifeLeft = lifeLeft;
-	}
-
-	public void setPlayer(Player player) {
-		this.player = player;
 	}
 
 	public Field getField() {
@@ -212,14 +181,6 @@ public class GameLogic {
 
 	public void setField(Field field) {
 		this.field = field;
-	}
-
-	public Thread getSpawnMonster() {
-		return spawnMonster;
-	}
-
-	public void setSpawnMonster(Thread spawnMonster) {
-		this.spawnMonster = spawnMonster;
 	}
 
 }

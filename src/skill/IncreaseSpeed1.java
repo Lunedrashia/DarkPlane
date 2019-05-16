@@ -17,9 +17,11 @@ public class IncreaseSpeed1 extends Skill {
 	public void activate(GameEntity user, int angle, double radius) throws SkillNotAvailableException {
 		// TODO Auto-generated method stub
 		if (!available) {
-			throw new SkillNotAvailableException("Skill on cooldown");
+			throw new SkillNotAvailableException(name + " is on cooldown");
 		}
 		int originalMaxSpeed = user.getMaxSpeed();
+		int originalAtk = user.getAtk();
+		user.setAtk(originalAtk*2);
 		user.setMaxSpeed(originalMaxSpeed*2);
 		user.setSpeed(originalMaxSpeed*2);
 		if (user instanceof Player) {
@@ -34,6 +36,7 @@ public class IncreaseSpeed1 extends Skill {
 				e.printStackTrace();
 			}
 			user.setMaxSpeed(originalMaxSpeed);
+			user.setAtk(originalAtk);
 			if (user instanceof Player) {
 				((Player) user).switchFadeEffect();
 			}

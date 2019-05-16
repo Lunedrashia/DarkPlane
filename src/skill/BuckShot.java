@@ -18,7 +18,7 @@ public class BuckShot extends Skill {
 	public void activate(GameEntity user, int angle, double radius) throws SkillNotAvailableException {
 		// TODO Auto-generated method stub
 		if (!available) {
-			throw new SkillNotAvailableException("Skill on cooldown");
+			throw new SkillNotAvailableException(name + " is on cooldown");
 		}
 		for (int i = -3; i <= 3; i++) {
 			GameLogic.getInstance().addNewObject(

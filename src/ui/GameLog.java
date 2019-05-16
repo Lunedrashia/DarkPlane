@@ -2,6 +2,8 @@ package ui;
 
 import static javafx.scene.layout.BorderStrokeStyle.SOLID;
 
+import java.lang.Thread.State;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -38,15 +40,21 @@ public class GameLog extends Pane {
 	public void addData(String message) {
 		Label newLabel = new Label(message);
 		newLabel.setStyle("-fx-font-weight: bold");
+		this.setOpacity(0.8);
 		logDataList.add(newLabel);
 		if (logDataList.size() > 6) {
 			logDataList.remove(0);
 		}
 		logListView.scrollTo(newLabel);
+		if (fade != null && fade.getState() != State.TERMINATED) {
+			return;
+		}
 		fade = new Thread(() -> {
 			try {
-				Thread.sleep(5000);
 				while (this.getOpacity() > 0) {
+					if (this.getOpacity() == 0.8) {
+						Thread.sleep(1500);
+					}
 					this.setOpacity(this.getOpacity() - 0.05);
 					Thread.sleep(100);
 				}
@@ -54,7 +62,6 @@ public class GameLog extends Pane {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		});
 		fade.start();
 	}

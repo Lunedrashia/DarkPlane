@@ -51,7 +51,6 @@ public class InGameUI extends StackPane {
 			MouseButton button = e.getButton();
 			if (button == MouseButton.PRIMARY) {
 				Input.skill1Used = true;
-				System.out.println("LeftClick");
 			}
 			if (button == MouseButton.SECONDARY) {
 				Input.skill2Used = true;
@@ -63,7 +62,6 @@ public class InGameUI extends StackPane {
 		return instance;
 	}
 
-	
 	public LifeUI getLifeUI() {
 		return lifeUI;
 	}

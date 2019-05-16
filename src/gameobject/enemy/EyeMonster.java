@@ -3,6 +3,7 @@ package gameobject.enemy;
 import gameobject.effect.BombEffect;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Circle;
 import render.RenderHolder;
 
@@ -33,6 +34,8 @@ public class EyeMonster extends Chaser {
 		// TODO Auto-generated method stub
 		super.onDestroy();
 		RenderHolder.getInstance().addNewObject(new BombEffect(location.getX(), location.getY(), 2));
+		AudioClip explosionSound = RenderHolder.soundCollection.get("ExplosionSFX");
+		explosionSound.play(0.4);
 	}
 
 }

@@ -1,0 +1,23 @@
+.button {
+  -fx-display: inline-block;
+  -fx-padding: 15px 25px;
+  -fx-pref-width: 350px;
+  -fx-pref-height: 75px;
+  -fx-font-size: 48;
+  -fx-font-weight: bold;
+  -fx-cursor: pointer;
+  -fx-text-align: center;
+  -fx-text-decoration: none;
+  -fx-outline: none;
+  -fx-color: #fff;
+  -fx-background-color: #4CAF50;
+  -fx-border: none;
+  -fx-border-radius: 15px;
+}
+
+.button:hover {-fx-background-color: #3e8e41}
+
+.button:active {
+  -fx-background-color: #3e8e41;
+  -fx-translate-y: -2;
+}

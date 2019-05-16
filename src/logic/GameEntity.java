@@ -1,14 +1,16 @@
 package logic;
 
+import java.util.ArrayList;
+
 import gameobject.bullet.Bullet;
 import javafx.geometry.Point2D;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.shape.Shape;
 import render.Renderable;
-import skill.CanHaveTarget;
 import skill.Skill;
 import skill.SkillNotAvailableException;
+import ui.InGameUI;
 
 public abstract class GameEntity implements Renderable {
 
@@ -22,12 +24,15 @@ public abstract class GameEntity implements Renderable {
 	protected int layer;
 	protected boolean isVisible, isAlive;
 	protected boolean isInvincible = false;
+	protected boolean canMove = true;
+	protected ArrayList<Skill> skillList;
 	
 	protected GameEntity(double x, double y, int angle) {
 		isVisible = true;
 		isAlive = true;
 		location = new Point2D(x, y);
 		this.angle = angle;
+		skillList = new ArrayList<Skill>();
 	}
 
 	@Override
@@ -75,6 +80,13 @@ public abstract class GameEntity implements Renderable {
 		if (speed > 0) {
 			speed--;
 		}
+	}
+	
+	public void slide(int angle) {
+		int beforeChange = this.angle;
+		this.angle = angle;
+		move();
+		this.angle = beforeChange;
 	}
 	
 	public void move() {
@@ -130,24 +142,32 @@ public abstract class GameEntity implements Renderable {
 		gc.restore();
 	}
 	
-	protected void useSkill(Skill skill, int angle, double radius) {
+	protected boolean useSkill(Skill skill, int angle, double radius) {
 		try {
 			skill.activate(this, angle, radius);
+			return true;
 		} catch (SkillNotAvailableException e) {
 			if (this == GameLogic.getInstance().getPlayer()) {
-				System.out.println(e.message);
+				InGameUI.getInstance().getGameLog().addData(e.message);
 			}
+			return false;
 		}
 	}
 	
-	protected void useSkill(CanHaveTarget skill, int angle, double radius, GameEntity target) {
-		try {
-			skill.activate(this, angle, radius, target);
-		} catch (SkillNotAvailableException e) {
-			if (this == GameLogic.getInstance().getPlayer()) {
-				System.out.println(e.message);
+	protected void blink(int ms) {
+		Thread blink = new Thread(() -> {
+			for (int i = 0; i < ms/250; i++) {
+				try {
+					Thread.sleep(250);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				isVisible = !isVisible;
 			}
-		}
+			isVisible = true;
+		});
+		blink.start();
 	}
 	
 	@Override
@@ -208,6 +228,42 @@ public abstract class GameEntity implements Renderable {
 
 	public void setInvincible(boolean isInvincible) {
 		this.isInvincible = isInvincible;
+	}
+
+	public boolean isCanMove() {
+		return canMove;
+	}
+
+	public void setCanMove(boolean canMove) {
+		this.canMove = canMove;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public int getAtk() {
+		return atk;
+	}
+
+	public void setAtk(int atk) {
+		this.atk = atk;
+	}
+
+	public int getDef() {
+		return def;
+	}
+
+	public void setDef(int def) {
+		this.def = def;
+	}
+
+	public ArrayList<Skill> getSkillList() {
+		return skillList;
 	}
 
 }

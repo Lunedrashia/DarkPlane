@@ -6,10 +6,11 @@ import logic.GameLogic;
 
 public class ShootBasicBullet extends Skill {
 
-	private static final int COOLDOWN = 500;
+	private int cooldown;
 	
-	public ShootBasicBullet() {
+	public ShootBasicBullet(int cooldown) {
 		super("Normal shot", "Shoot a normal bullet");
+		this.cooldown = cooldown;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -17,12 +18,12 @@ public class ShootBasicBullet extends Skill {
 	public void activate(GameEntity user, int angle, double radius) throws SkillNotAvailableException {
 		// TODO Auto-generated method stub
 		if (!available) {
-			throw new SkillNotAvailableException("Skill on cooldown");
+			throw new SkillNotAvailableException(name + " is on cooldown");
 		}
 		GameLogic.getInstance().addNewObject(
 				new PlayerBasicBullet(user.getLocation().getX() + Math.cos(Math.toRadians(angle)) * radius 
 						, user.getLocation().getY() + Math.sin(Math.toRadians(angle)) * radius, angle));
-		startCooldown(COOLDOWN);
+		startCooldown(cooldown);
 	}
 
 }

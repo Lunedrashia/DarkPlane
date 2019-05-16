@@ -2,6 +2,7 @@ package gameobject.bullet;
 
 import gameobject.effect.BombEffect;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.media.AudioClip;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.Shape;
@@ -19,6 +20,8 @@ public class PlayerBasicBullet extends Bullet {
 		hp = maxHP = 1;
 		atk = 1;
 		location.add(Math.cos(Math.toRadians(angle)) * LENGTH / 2, Math.sin(Math.toRadians(angle)) * WIDTH / 2);
+		AudioClip shotSound = RenderHolder.soundCollection.get("LaserSFX");
+		shotSound.play(0.05);
 		startLifetime(LIFETIME);
 	}
 

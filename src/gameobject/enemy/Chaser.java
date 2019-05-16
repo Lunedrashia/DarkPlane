@@ -20,13 +20,20 @@ public abstract class Chaser extends Enemy {
 		double dx = playerLocation.getX() - location.getX();
 		double dy = playerLocation.getY() - location.getY();
 		int targetAngle = (int) Math.toDegrees(Math.atan2(dy, dx));
-		//System.out.println(targetAngle);
-		if (angle < targetAngle) {
-			rotateRight();
+		
+		int rotationDifference = angle - targetAngle;
+
+		if(Math.abs(rotationDifference) > 180){
+		    rotationDifference += rotationDifference > 0 ? -360 : 360; 
 		}
-		else if (angle > targetAngle) {
-			rotateLeft();
+
+		if(rotationDifference < 0){
+		    rotateRight();
 		}
+		else if(rotationDifference > 0){
+		    rotateLeft();
+		}
+		
 		if (Math.abs(targetAngle - angle) < 30) {
 			this.forward();
 		}

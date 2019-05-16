@@ -9,7 +9,7 @@ import javafx.scene.media.AudioClip;
 
 public class RenderHolder {
 
-	private static final RenderHolder instance = new RenderHolder();
+	private static RenderHolder instance = new RenderHolder();
 	
 	private ArrayList<Renderable> allRender;
 	private Comparator<Renderable> comparator;

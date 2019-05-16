@@ -34,24 +34,6 @@ public abstract class GameEntity implements Renderable {
 		this.angle = angle;
 		skillList = new ArrayList<Skill>();
 	}
-
-	@Override
-	public int getLayer() {
-		// TODO Auto-generated method stub
-		return layer;
-	}
-
-	@Override
-	public boolean isVisible() {
-		// TODO Auto-generated method stub
-		return isVisible;
-	}
-
-	@Override
-	public boolean isAlive() {
-		// TODO Auto-generated method stub
-		return isAlive;
-	}
 	
 	public void rotateRight() {
 		angle += rotateSpeed;
@@ -178,6 +160,10 @@ public abstract class GameEntity implements Renderable {
 	public Point2D getLocation() {
 		return location;
 	}
+	
+	public void setLocation(Point2D location) {
+		this.location = location;
+	}
 
 	public int getMaxHP() {
 		return maxHP;
@@ -264,6 +250,24 @@ public abstract class GameEntity implements Renderable {
 
 	public ArrayList<Skill> getSkillList() {
 		return skillList;
+	}
+	
+	@Override
+	public int getLayer() {
+		// TODO Auto-generated method stub
+		return layer;
+	}
+
+	@Override
+	public boolean isVisible() {
+		// TODO Auto-generated method stub
+		return isVisible;
+	}
+
+	@Override
+	public boolean isAlive() {
+		// TODO Auto-generated method stub
+		return isAlive;
 	}
 
 }

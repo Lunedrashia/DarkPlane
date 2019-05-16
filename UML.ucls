@@ -57,7 +57,7 @@
   </class>  
   <interface id="7" language="java" name="render.Renderable" project="Final Project PorkMeth" 
     file="/Final Project PorkMeth/src/render/Renderable.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2476" y="208"/>    
+    <position height="-1" width="-1" x="2476" y="211"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -210,7 +210,7 @@
   </class>  
   <class id="24" language="java" name="gameobject.field.Field" project="Final Project PorkMeth" 
     file="/Final Project PorkMeth/src/gameobject/field/Field.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2656" y="668"/>    
+    <position height="-1" width="-1" x="2656" y="665"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

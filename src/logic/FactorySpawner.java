@@ -21,7 +21,7 @@ public class FactorySpawner {
 	private int monsterTypeLimit = 1;
 	private int indexBoss = 0;
 	private boolean bossAlive = false;
-	private boolean spawnDone = false; 
+	private boolean spawnDone = false;
 	
 	private Enemy currentBoss;
 	
@@ -125,6 +125,14 @@ public class FactorySpawner {
 
 	public Thread getSpawnMosterThread() {
 		return spawnMosterThread;
+	}
+
+	public ArrayList<String> getEnemyTypes() {
+		return enemyTypes;
+	}
+
+	public ArrayList<String> getBossTypes() {
+		return bossTypes;
 	}
 	
 }

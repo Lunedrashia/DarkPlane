@@ -33,7 +33,7 @@ public class GameLogic {
 		gameEntities = new ArrayList<GameEntity>();
 		enemies = new ArrayList<Enemy>();
 		bullets = new ArrayList<Bullet>();
-		sceneSetUp(sceneName);
+		sceneSetup(sceneName);
 	}
 
 	public void addNewObject(GameEntity e) {
@@ -108,13 +108,12 @@ public class GameLogic {
 		}
 	}
 
-	private void sceneSetUp(String sceneName) {
+	private void sceneSetup(String sceneName) {
 		if (sceneName.equals("TestScene")) {
 			lifeLeft = 3;
 			field = new BasicField(0, 0);
 			playerSpawnTower = new PlayerSpawnTower(field.getPlayerSpawnLocation().getX(), field.getPlayerSpawnLocation().getY());
 			player = playerSpawnTower.spawnPlayer();
-			
 			RenderHolder.getInstance().addNewObject(field);
 			this.addNewObject(playerSpawnTower);
 			this.addNewObject(player);
